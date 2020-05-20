@@ -250,4 +250,3 @@ CREATE TABLE IF NOT EXISTS holidays(
   , PRIMARY KEY (holiday_id)
   , KEY idx_holidays (holiday_name, deleted_at)
 ) COMMENT='祝日';
-

@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/sidebarLayout}">
+<head>
+    <title>グループマスタ</title>
+</head>
+<body>
+<div layout:fragment="sidebar">
+    <div th:replace="~{layouts/sidebar :: sidebar ('group', 'group')}"></div>
+</div>
+<section layout:fragment="content-header">
+    <h1 th:with="text=${groupForm.isNew()} ? '顧客登録' : '顧客編集'" th:text="${text}">グループ登録</h1>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/groups/groups/find(page=1)}">グループ検索</a></li>
+        <li th:with="text=${groupForm.isNew()} ? 'グループ登録' : 'グループ編集'" th:text="${text}">グループ登録</li>
+    </ol>
+</section>
+<section layout:fragment="content">
+    <div class="box">
+        <form th:object="${groupForm}" th:action="${action}" id="form1"
+              th:with="action=${groupForm.isNew()} ? @{/groups/groups/new} : @{/groups/groups/edit/{id}(id=*{id})}"
+              class="form-horizontal" enctype="multipart/form-data" method="post">
+            <div class="box-body">
+                <input th:replace="~{fragments/inputField :: input ('text', '名称', 'fullName')}" />
+                <input th:replace="~{fragments/inputField :: input ('text', '略称', 'shortName')}" />
+                <input th:replace="~{fragments/inputField :: input ('text', 'メールアドレス', 'email')}" />
+                <input th:replace="~{fragments/inputField :: input ('text', '郵便番号', 'zip')}" />
+                <input th:replace="~{fragments/inputField :: input ('text', '住所', 'address')}" />
+                <input th:replace="~{fragments/inputField :: input ('text', '電話番号', 'tel')}" />
+                <input th:replace="~{fragments/inputField :: input ('file', '添付画像', 'userImage')}" />
+            </div>
+            <div class="box-footer">
+                <button class="btn btn-default bg-purple" type="submit"
+                        th:with="text=${groupForm.isNew()} ? '登録' : '保存'" th:text="${text}">
+                    Add User
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+<div layout:fragment="scripts">
+    <script th:replace="~{fragments/validationScript :: script}" />
+    <script type="text/javascript" src="../public/static/js/system/users.js"
+            th:src="@{/static/js/system/users.js}"></script>
+</div>
+</html>

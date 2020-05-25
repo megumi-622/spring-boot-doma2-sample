@@ -66,9 +66,7 @@ public class UserHtmlController extends AbstractHtmlController {
     }
 
     @Override
-    public String getFunctionName() {
-        return "A_USER";
-    }
+    public String getFunctionName() { return "A_USER"; }
 
     /**
      * 登録画面 初期表示
